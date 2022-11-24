@@ -21,7 +21,6 @@ export default function salonBooking(db) {
             const data = await db.manyOrNone(`select * from client 
             where phone_number = $1`,[phoneNumber]);
             clientID = data[0].id
-            console.log('myclient',clientID);
             await findClientBookings(clientID)
             return data;
         } catch (error) {
@@ -70,14 +69,12 @@ export default function salonBooking(db) {
 
     async function findAllBookings(date,time){
         const data = await db.manyOrNone(`select * from booking where booking_date = $1 AND booking_time = $2`,[date,time]);
-        console.log('booking', data);
         return data;
     }
 
     async function totalIncomeForDay(date){
         const data = await  db.manyOrNone(`select SUM(treatment.price) from booking join 
         treatment ON booking.treatment_id = treatment.id where booking.booking_date = $1`,[date]);
-        console.log('Money',data);
         return data;
     }
 
