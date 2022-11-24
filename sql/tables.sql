@@ -18,7 +18,7 @@ CREATE TABLE stylist(
     first_name VARCHAR(20) NOT NULL,
     last_name VARCHAR(20) NOT NULL,
     phone_number VARCHAR(20) NOT NULL,
-    commission_percentage numeric(3.2) NOT NULL
+    commission_percentage numeric(3,2) NOT NULL
 );
 
 CREATE TABLE booking(
