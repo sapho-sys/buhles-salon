@@ -34,7 +34,8 @@ jobs:
     - name: Install dependencies
       run: npm install
     - name: create postgresql tables
-      run: PGPASSWORD=sap123 psql -h localhost -U postgres -d my_treats -a -f ./sql/tables.sql
+      run: PGPASSWORD=sap123 psql -h localhost -U postgres -d my_treats -a -f ./sql/tables.sql, ./sql/data.sql
+      
     - name: run tests with postgresql
       run:
         npm test
