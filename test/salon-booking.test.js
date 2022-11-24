@@ -161,16 +161,30 @@ describe("The Booking Salon", function () {
 
     });
 
-    it("should be able to find the total income for a day", function() {
-        assert.equal(1, 2);
+    it("should be able to find the total income for a day", async function() {
+        const client1 = await booking.findClient("0607230876");
+        let customer = client1[0].id
+    
+
+        const stylist = await booking.findStylist('0737219876');
+        let styler = stylist[0].id
+        
+        const treatment1 = await booking.findTreatment("MNQ2");
+        let treat = treatment1[0].id
+
+        const bookingss = await booking.makeBooking('2022-09-20', '12:30', treat, customer ,styler);
+        const bookingss2 = await booking.makeBooking('2022-09-20', '12:30', treat, customer ,styler);
+        const calculate = await booking.totalIncomeForDay('2022-09-20');
+        
+        assert.deepEqual([ { sum: '430.00' } ],calculate);
     })
 
-    it("should be able to find the most valuable client", function() {
-        assert.equal(1, 2);
-    })
-    it("should be able to find the total commission for a given stylist", function() {
-        assert.equal(1, 2);
-    })
+    // it("should be able to find the most valuable client", function() {
+    //     assert.equal(1, 2);
+    // })
+    // it("should be able to find the total commission for a given stylist", function() {
+    //     assert.equal(1, 2);
+    // })
 
     after(function () {
         db.$pool.end()

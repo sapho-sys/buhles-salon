@@ -74,6 +74,14 @@ export default function salonBooking(db) {
         return data;
     }
 
+    async function totalIncomeForDay(date){
+        const data = await  db.manyOrNone(`select SUM(treatment.price) from booking join 
+        treatment ON booking.treatment_id = treatment.id where booking.booking_date = $1`,[date]);
+        console.log('Money',data);
+        return data;
+    }
+
+    
     
 
 
@@ -84,7 +92,8 @@ export default function salonBooking(db) {
         findAllTreatments,
         makeBooking,
         findClientBookings,
-        findAllBookings
+        findAllBookings,
+        totalIncomeForDay
 
     }
 }  
